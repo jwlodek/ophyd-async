@@ -24,6 +24,7 @@ from ._utils import (
 )
 
 __all__ = [
+    "AreaDetector",
     "ADBaseIO",
     "DetectorState",
     "NDArrayBaseIO",
@@ -33,7 +34,6 @@ __all__ = [
     "DEFAULT_GOOD_STATES",
     "ADBaseDatasetDescriber",
     "ADBaseController",
-    "AreaDetector",
     "ADWriter",
     "ADHDFWriter",
     "ADTIFFWriter",

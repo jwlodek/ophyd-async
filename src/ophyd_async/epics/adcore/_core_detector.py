@@ -1,66 +1,62 @@
 from collections.abc import Sequence
-from typing import cast
+from typing import Generic, TypeVar
 
-from bluesky.protocols import HasHints, Hints
+from ophyd_async.core import PathProvider, StandardDetector
+from ophyd_async.core._detector import DetectorControllerT
+from ophyd_async.core._signal import SignalR
 
-from ophyd_async.core import PathProvider, SignalR, StandardDetector
-
-from ._core_io import ADBaseIO, NDFileHDFIO, NDFileIO
-from ._core_logic import ADBaseController, ADBaseDatasetDescriber
-from ._core_writer import ADWriter
+from ._core_io import ADBaseIO, NDFileHDFIO, NDFileIO, NDPluginBaseIO
+from ._core_logic import ADBaseDatasetDescriber
 from ._hdf_writer import ADHDFWriter
 from ._tiff_writer import ADTIFFWriter
 
-
-def get_io_class_for_writer(writer_class: type[ADWriter]):
-    writer_to_io_map = {
-        ADWriter: NDFileIO,
-        ADHDFWriter: NDFileHDFIO,
-        ADTIFFWriter: NDFileIO,
-    }
-    return writer_to_io_map[writer_class]
+ADBaseIOT = TypeVar("ADBaseIOT", bound=ADBaseIO)
+NDFileIOT = TypeVar("NDFileIOT", bound=NDFileIO)
+NDPluginBaseIOT = TypeVar("NDPluginBaseIOT", bound=NDPluginBaseIO)
 
 
-class AreaDetector(StandardDetector, HasHints):
-    _controller: ADBaseController
-    _writer: ADWriter
-
+class AreaDetector(
+    Generic[ADBaseIOT, NDFileIOT, DetectorControllerT],
+    StandardDetector[DetectorControllerT],
+):
     def __init__(
         self,
-        prefix: str,
+        drv: ADBaseIOT,
+        controller: DetectorControllerT,
+        fileio: NDFileIOT,
         path_provider: PathProvider,
-        writer_class: type[ADWriter] = ADWriter,
-        writer_suffix: str = "",
-        controller_class: type[ADBaseController] = ADBaseController,
-        drv_class: type[ADBaseIO] = ADBaseIO,
-        drv_suffix: str = "cam1:",
-        name: str = "",
+        plugins: dict[str, NDPluginBaseIO],
         config_sigs: Sequence[SignalR] = (),
-        **kwargs,
+        name: str = "",
     ):
-        self.drv = drv_class(prefix + drv_suffix)
-        self._fileio = get_io_class_for_writer(writer_class)(prefix + writer_suffix)
+        self.drv = drv
+        self.fileio = fileio
+        for name, plugin in plugins.items():
+            setattr(self, name, plugin)
 
-        super().__init__(
-            controller_class(self.drv, **kwargs),
-            writer_class(
-                self._fileio,
+        def name_provider():
+            return self.name
+
+        if isinstance(fileio, NDFileHDFIO):
+            writer = ADHDFWriter(
+                fileio,
                 path_provider,
-                lambda: self.name,
-                ADBaseDatasetDescriber(self.drv),
-            ),
-            config_sigs=(self.drv.acquire_period, self.drv.acquire_time, *config_sigs),
-            name=name,
-        )
+                name_provider,
+                ADBaseDatasetDescriber(drv),
+                *plugins.values(),
+            )
+        else:
+            writer = ADTIFFWriter(
+                fileio, path_provider, name_provider, ADBaseDatasetDescriber(drv)
+            )
+        super().__init__(controller, writer, config_sigs, name)
 
-    @property
-    def controller(self) -> ADBaseController:
-        return cast(ADBaseController, self._controller)
-
-    @property
-    def writer(self) -> ADWriter:
-        return cast(ADWriter, self._writer)
-
-    @property
-    def hints(self) -> Hints:
-        return self._writer.hints
+    def get_plugin(
+        self, name: str, plugin_type: type[NDPluginBaseIOT] = NDPluginBaseIO
+    ) -> NDPluginBaseIOT:
+        plugin = getattr(self, name, None)
+        if not isinstance(plugin, plugin_type):
+            raise TypeError(
+                f"Expected {self.name}.{name} to be a {plugin_type}, got {plugin}"
+            )
+        return plugin
