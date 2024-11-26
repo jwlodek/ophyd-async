@@ -2,9 +2,5 @@
   {
     "version": "main",
     "url": "https://jwlodek.github.io/ophyd-async/main/"
-  },
-  {
-    "version": "add-vimba-kinetix-classes",
-    "url": "https://jwlodek.github.io/ophyd-async/add-vimba-kinetix-classes/"
   }
 ]
