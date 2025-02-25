@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ophyd_async.core._log &#8212; ophyd-async 0.1.dev667+g1d05222 documentation</title>
+    <title>ophyd_async.core._log &#8212; ophyd-async 0.1.dev720+gf9f985a documentation</title>
   
   
   
@@ -15,8 +15,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
+  <!--
+    this give us a css class that will be invisible only if js is disabled
   -->
   <noscript>
     <style>
@@ -26,24 +26,23 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/autodoc_pydantic.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=3fefa004" />
   
   <!-- So that users can add custom icons -->
-  <script src="../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../_static/documentation_options.js?v=914bc5b4"></script>
-    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/documentation_options.js?v=2ddf5859"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=30646c52"></script>
@@ -58,10 +57,11 @@ window.addEventListener("load", () => mermaid.run());
 </script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/ophyd_async/core/_log';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.16.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://blueskyproject.io/ophyd-async/switcher.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'main';
-        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
         </script>
     <link rel="icon" href="../../../_static/ophyd-favicon.svg"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -134,8 +134,8 @@ window.addEventListener("load", () => mermaid.run());
       
     
     
-    <img src="../../../_static/ophyd-async-logo.svg" class="logo__image only-light" alt="ophyd-async 0.1.dev667+g1d05222 documentation - Home"/>
-    <img src="../../../_static/ophyd-async-logo.svg" class="logo__image only-dark pst-js-only" alt="ophyd-async 0.1.dev667+g1d05222 documentation - Home"/>
+    <img src="../../../_static/ophyd-async-logo.svg" class="logo__image only-light" alt="ophyd-async 0.1.dev720+gf9f985a documentation - Home"/>
+    <img src="../../../_static/ophyd-async-logo.svg" class="logo__image only-dark pst-js-only" alt="ophyd-async 0.1.dev720+gf9f985a documentation - Home"/>
   
   
 </a></div>
@@ -409,9 +409,14 @@ window.addEventListener("load", () => mermaid.run());
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -458,10 +463,10 @@ window.addEventListener("load", () => mermaid.run());
                 <article class="bd-article">
                   
   <h1>Source code for ophyd_async.core._log</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">sys</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 
-<span class="kn">import</span> <span class="nn">colorlog</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">colorlog</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span>
     <span class="s2">&quot;config_ophyd_async_logging&quot;</span><span class="p">,</span>
@@ -485,15 +490,15 @@ window.addEventListener("load", () => mermaid.run());
 <span class="p">}</span>
 
 
-<span class="k">class</span> <span class="nc">ColoredFormatterWithDeviceName</span><span class="p">(</span><span class="n">colorlog</span><span class="o">.</span><span class="n">ColoredFormatter</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">record</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ColoredFormatterWithDeviceName</span><span class="p">(</span><span class="n">colorlog</span><span class="o">.</span><span class="n">ColoredFormatter</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">record</span><span class="p">):</span>
         <span class="n">message</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">record</span><span class="p">,</span> <span class="s2">&quot;ophyd_async_device_name&quot;</span><span class="p">):</span>
             <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">record</span><span class="o">.</span><span class="n">ophyd_async_device_name</span><span class="si">}</span><span class="s2">]</span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span>  <span class="c1"># type: ignore</span>
         <span class="k">return</span> <span class="n">message</span>
 
 
-<span class="k">def</span> <span class="nf">_validate_level</span><span class="p">(</span><span class="n">level</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_validate_level</span><span class="p">(</span><span class="n">level</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return an int for level comparison.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
         <span class="n">levelno</span> <span class="o">=</span> <span class="n">level</span>
@@ -517,39 +522,31 @@ window.addEventListener("load", () => mermaid.run());
 
 
 <div class="viewcode-block" id="config_ophyd_async_logging">
-<a class="viewcode-back" href="../../../_api/ophyd_async.core.html#ophyd_async.core.config_ophyd_async_logging">[docs]</a>
-<span class="k">def</span> <span class="nf">config_ophyd_async_logging</span><span class="p">(</span>
+<a class="viewcode-back" href="../../../_api/ophyd_async/ophyd_async.core.html#ophyd_async.core.config_ophyd_async_logging">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">config_ophyd_async_logging</span><span class="p">(</span>
     <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span>
     <span class="n">fmt</span><span class="o">=</span><span class="n">DEFAULT_FORMAT</span><span class="p">,</span>
     <span class="n">datefmt</span><span class="o">=</span><span class="n">DEFAULT_DATE_FORMAT</span><span class="p">,</span>
     <span class="n">color</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">level</span><span class="o">=</span><span class="s2">&quot;WARNING&quot;</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Set a new handler on the ``logging.getLogger(&#39;ophyd_async&#39;)`` logger.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set a new handler on the ``logging.getLogger(&#39;ophyd_async&#39;)`` logger.</span>
+
 <span class="sd">    If this is called more than once, the handler from the previous invocation</span>
 <span class="sd">    is removed (if still present) and replaced.</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    file : object with ``write`` method or filename string</span>
-<span class="sd">        Default is ``sys.stdout``.</span>
-<span class="sd">    fmt : Overall logging format</span>
-<span class="sd">    datefmt : string</span>
-<span class="sd">        Date format. Default is ``&#39;%H:%M:%S&#39;``.</span>
-<span class="sd">    color : boolean</span>
-<span class="sd">        Use ANSI color codes. True by default.</span>
-<span class="sd">    level : str or int</span>
-<span class="sd">        Python logging level, given as string or corresponding integer.</span>
-<span class="sd">        Default is &#39;WARNING&#39;.</span>
 
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    handler : logging.Handler</span>
-<span class="sd">        The handler, which has already been added to the &#39;ophyd_async&#39; logger.</span>
+<span class="sd">    :param file:</span>
+<span class="sd">        object with ``write`` method or filename string. Default is `sys.stdout`.</span>
+<span class="sd">    :param fmt: str Overall logging format</span>
+<span class="sd">    :param datefmt: str Date format. Default is `&#39;%H:%M:%S&#39;`.</span>
+<span class="sd">    :param color: bool Use ANSI color codes. True by default.</span>
+<span class="sd">    :param level: str or int Python logging level, given as string or</span>
+<span class="sd">        corresponding integer. Default is &#39;WARNING&#39;.</span>
 
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
+<span class="sd">    :returns: The handler, which has already been added to the &#39;ophyd_async&#39; logger.</span>
+
+<span class="sd">    :examples:</span>
 <span class="sd">    Log to a file.</span>
 
 <span class="sd">        config_ophyd_async_logging(file=&#39;/tmp/what_is_happening.txt&#39;)</span>
@@ -566,7 +563,6 @@ window.addEventListener("load", () => mermaid.run());
 <span class="sd">    Increase verbosity: show level DEBUG or higher.</span>
 
 <span class="sd">        config_ophyd_async_logging(level=&#39;DEBUG&#39;)</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">global</span> <span class="n">current_handler</span>
 
@@ -630,8 +626,8 @@ window.addEventListener("load", () => mermaid.run());
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -642,7 +638,8 @@ window.addEventListener("load", () => mermaid.run());
       
         <div class="footer-item">
 <p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
 </p></div>
       
     </div>

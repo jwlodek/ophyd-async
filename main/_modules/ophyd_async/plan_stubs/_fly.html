@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ophyd_async.plan_stubs._fly &#8212; ophyd-async 0.1.dev667+g1d05222 documentation</title>
+    <title>ophyd_async.plan_stubs._fly &#8212; ophyd-async 0.1.dev720+gf9f985a documentation</title>
   
   
   
@@ -15,8 +15,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
+  <!--
+    this give us a css class that will be invisible only if js is disabled
   -->
   <noscript>
     <style>
@@ -26,24 +26,23 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/autodoc_pydantic.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=3fefa004" />
   
   <!-- So that users can add custom icons -->
-  <script src="../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../_static/documentation_options.js?v=914bc5b4"></script>
-    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/documentation_options.js?v=2ddf5859"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../_static/copybutton.js?v=30646c52"></script>
@@ -58,10 +57,11 @@ window.addEventListener("load", () => mermaid.run());
 </script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/ophyd_async/plan_stubs/_fly';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.16.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://blueskyproject.io/ophyd-async/switcher.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'main';
-        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
         </script>
     <link rel="icon" href="../../../_static/ophyd-favicon.svg"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -134,8 +134,8 @@ window.addEventListener("load", () => mermaid.run());
       
     
     
-    <img src="../../../_static/ophyd-async-logo.svg" class="logo__image only-light" alt="ophyd-async 0.1.dev667+g1d05222 documentation - Home"/>
-    <img src="../../../_static/ophyd-async-logo.svg" class="logo__image only-dark pst-js-only" alt="ophyd-async 0.1.dev667+g1d05222 documentation - Home"/>
+    <img src="../../../_static/ophyd-async-logo.svg" class="logo__image only-light" alt="ophyd-async 0.1.dev720+gf9f985a documentation - Home"/>
+    <img src="../../../_static/ophyd-async-logo.svg" class="logo__image only-dark pst-js-only" alt="ophyd-async 0.1.dev720+gf9f985a documentation - Home"/>
   
   
 </a></div>
@@ -409,9 +409,14 @@ window.addEventListener("load", () => mermaid.run());
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -458,25 +463,25 @@ window.addEventListener("load", () => mermaid.run());
                 <article class="bd-article">
                   
   <h1>Source code for ophyd_async.plan_stubs._fly</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">bluesky.plan_stubs</span> <span class="k">as</span> <span class="nn">bps</span>
-<span class="kn">from</span> <span class="nn">bluesky.utils</span> <span class="kn">import</span> <span class="n">short_uid</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">bluesky.plan_stubs</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">bps</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bluesky.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">short_uid</span>
 
-<span class="kn">from</span> <span class="nn">ophyd_async.core</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ophyd_async.core</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">DetectorTrigger</span><span class="p">,</span>
     <span class="n">StandardDetector</span><span class="p">,</span>
     <span class="n">StandardFlyer</span><span class="p">,</span>
     <span class="n">TriggerInfo</span><span class="p">,</span>
     <span class="n">in_micros</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">ophyd_async.fastcs.panda</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">PcompDirection</span><span class="p">,</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ophyd_async.fastcs.panda</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">PandaPcompDirection</span><span class="p">,</span>
     <span class="n">PcompInfo</span><span class="p">,</span>
     <span class="n">SeqTable</span><span class="p">,</span>
     <span class="n">SeqTableInfo</span><span class="p">,</span>
 <span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">prepare_static_pcomp_flyer_and_detectors</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">prepare_static_pcomp_flyer_and_detectors</span><span class="p">(</span>
     <span class="n">flyer</span><span class="p">:</span> <span class="n">StandardFlyer</span><span class="p">[</span><span class="n">PcompInfo</span><span class="p">],</span>
     <span class="n">detectors</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">StandardDetector</span><span class="p">],</span>
     <span class="n">pcomp_info</span><span class="p">:</span> <span class="n">PcompInfo</span><span class="p">,</span>
@@ -488,7 +493,6 @@ window.addEventListener("load", () => mermaid.run());
 <span class="sd">    same trigger.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-
     <span class="k">for</span> <span class="n">det</span> <span class="ow">in</span> <span class="n">detectors</span><span class="p">:</span>
         <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span><span class="n">det</span><span class="p">,</span> <span class="n">trigger_info</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s2">&quot;prep&quot;</span><span class="p">)</span>
     <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span><span class="n">flyer</span><span class="p">,</span> <span class="n">pcomp_info</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s2">&quot;prep&quot;</span><span class="p">)</span>
@@ -496,8 +500,8 @@ window.addEventListener("load", () => mermaid.run());
 
 
 <div class="viewcode-block" id="prepare_static_seq_table_flyer_and_detectors_with_same_trigger">
-<a class="viewcode-back" href="../../../_api/ophyd_async.plan_stubs.html#ophyd_async.plan_stubs.prepare_static_seq_table_flyer_and_detectors_with_same_trigger">[docs]</a>
-<span class="k">def</span> <span class="nf">prepare_static_seq_table_flyer_and_detectors_with_same_trigger</span><span class="p">(</span>
+<a class="viewcode-back" href="../../../_api/ophyd_async/ophyd_async.plan_stubs.html#ophyd_async.plan_stubs.prepare_static_seq_table_flyer_and_detectors_with_same_trigger">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">prepare_static_seq_table_flyer_and_detectors_with_same_trigger</span><span class="p">(</span>
     <span class="n">flyer</span><span class="p">:</span> <span class="n">StandardFlyer</span><span class="p">[</span><span class="n">SeqTableInfo</span><span class="p">],</span>
     <span class="n">detectors</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">StandardDetector</span><span class="p">],</span>
     <span class="n">number_of_frames</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
@@ -520,7 +524,7 @@ window.addEventListener("load", () => mermaid.run());
     <span class="k">if</span> <span class="ow">not</span> <span class="n">detectors</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No detectors provided. There must be at least one.&quot;</span><span class="p">)</span>
 
-    <span class="n">deadtime</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">det</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">get_deadtime</span><span class="p">(</span><span class="n">exposure</span><span class="p">)</span> <span class="k">for</span> <span class="n">det</span> <span class="ow">in</span> <span class="n">detectors</span><span class="p">)</span>
+    <span class="n">deadtime</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">det</span><span class="o">.</span><span class="n">_controller</span><span class="o">.</span><span class="n">get_deadtime</span><span class="p">(</span><span class="n">exposure</span><span class="p">)</span> <span class="k">for</span> <span class="n">det</span> <span class="ow">in</span> <span class="n">detectors</span><span class="p">)</span>  <span class="c1"># noqa: SLF001</span>
 
     <span class="n">trigger_info</span> <span class="o">=</span> <span class="n">TriggerInfo</span><span class="p">(</span>
         <span class="n">number_of_triggers</span><span class="o">=</span><span class="n">number_of_frames</span> <span class="o">*</span> <span class="n">repeats</span><span class="p">,</span>
@@ -564,8 +568,8 @@ window.addEventListener("load", () => mermaid.run());
 
 
 <div class="viewcode-block" id="fly_and_collect">
-<a class="viewcode-back" href="../../../_api/ophyd_async.plan_stubs.html#ophyd_async.plan_stubs.fly_and_collect">[docs]</a>
-<span class="k">def</span> <span class="nf">fly_and_collect</span><span class="p">(</span>
+<a class="viewcode-back" href="../../../_api/ophyd_async/ophyd_async.plan_stubs.html#ophyd_async.plan_stubs.fly_and_collect">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">fly_and_collect</span><span class="p">(</span>
     <span class="n">stream_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">flyer</span><span class="p">:</span> <span class="n">StandardFlyer</span><span class="p">[</span><span class="n">SeqTableInfo</span><span class="p">]</span> <span class="o">|</span> <span class="n">StandardFlyer</span><span class="p">[</span><span class="n">PcompInfo</span><span class="p">],</span>
     <span class="n">detectors</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">StandardDetector</span><span class="p">],</span>
@@ -606,14 +610,14 @@ window.addEventListener("load", () => mermaid.run());
 
 
 
-<span class="k">def</span> <span class="nf">fly_and_collect_with_static_pcomp</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fly_and_collect_with_static_pcomp</span><span class="p">(</span>
     <span class="n">stream_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">flyer</span><span class="p">:</span> <span class="n">StandardFlyer</span><span class="p">[</span><span class="n">PcompInfo</span><span class="p">],</span>
     <span class="n">detectors</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">StandardDetector</span><span class="p">],</span>
     <span class="n">number_of_pulses</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">pulse_width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">rising_edge_step</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-    <span class="n">direction</span><span class="p">:</span> <span class="n">PcompDirection</span><span class="p">,</span>
+    <span class="n">direction</span><span class="p">:</span> <span class="n">PandaPcompDirection</span><span class="p">,</span>
     <span class="n">trigger_info</span><span class="p">:</span> <span class="n">TriggerInfo</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="c1"># Set up scan and prepare trigger</span>
@@ -633,8 +637,8 @@ window.addEventListener("load", () => mermaid.run());
 
 
 <div class="viewcode-block" id="time_resolved_fly_and_collect_with_static_seq_table">
-<a class="viewcode-back" href="../../../_api/ophyd_async.plan_stubs.html#ophyd_async.plan_stubs.time_resolved_fly_and_collect_with_static_seq_table">[docs]</a>
-<span class="k">def</span> <span class="nf">time_resolved_fly_and_collect_with_static_seq_table</span><span class="p">(</span>
+<a class="viewcode-back" href="../../../_api/ophyd_async/ophyd_async.plan_stubs.html#ophyd_async.plan_stubs.time_resolved_fly_and_collect_with_static_seq_table">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">time_resolved_fly_and_collect_with_static_seq_table</span><span class="p">(</span>
     <span class="n">stream_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">flyer</span><span class="p">:</span> <span class="n">StandardFlyer</span><span class="p">[</span><span class="n">SeqTableInfo</span><span class="p">],</span>
     <span class="n">detectors</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">StandardDetector</span><span class="p">],</span>
@@ -658,7 +662,6 @@ window.addEventListener("load", () => mermaid.run());
 <span class="sd">    stages/unstages the devices, and opens and closes the run.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-
     <span class="c1"># Set up scan and prepare trigger</span>
     <span class="k">yield from</span> <span class="n">prepare_static_seq_table_flyer_and_detectors_with_same_trigger</span><span class="p">(</span>
         <span class="n">flyer</span><span class="p">,</span>
@@ -702,8 +705,8 @@ window.addEventListener("load", () => mermaid.run());
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -714,7 +717,8 @@ window.addEventListener("load", () => mermaid.run());
       
         <div class="footer-item">
 <p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
 </p></div>
       
     </div>
