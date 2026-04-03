@@ -208,7 +208,7 @@ class KinetixDetector(AreaDetector[KinetixDriverIO], Movable):
     @AsyncStatus.wrap
     async def set(self, mode: KinetixReadoutMode):
         """Switch the readout mode of the detector."""
-        # This sequence must occur sequentially.
+
         await self.driver.readout_port_idx.set(mode)
 
         if not await self.driver.readout_mode_valid.get_value():
