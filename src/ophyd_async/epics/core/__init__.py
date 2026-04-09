@@ -4,6 +4,8 @@ from ._pvi_connector import PviDeviceConnector, PviTree, SignalDetails
 from ._signal import (
     CaSignalBackend,
     PvaSignalBackend,
+    epics_mbb_direct_r,
+    epics_mbb_direct_rw,
     epics_signal_r,
     epics_signal_rw,
     epics_signal_rw_rbv,
@@ -29,4 +31,6 @@ __all__ = [
     "stop_busy_record",
     "wait_for_good_state",
     "EpicsOptions",
+    "epics_mbb_direct_r",
+    "epics_mbb_direct_rw",
 ]

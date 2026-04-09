@@ -185,7 +185,11 @@ class PvaEnumBoolConverter(PvaConverter[bool]):
         super().__init__(bool)
 
     def value(self, value: Any) -> bool:
-        return bool(value["value"]["index"])
+        value = value["value"]
+        if isinstance(value, int):
+            return bool(value)
+        else:
+            return bool(value["index"])
 
 
 class PvaTableConverter(PvaConverter[Table]):
@@ -267,6 +271,14 @@ def make_converter(datatype: type | None, values: dict[str, Any]) -> PvaConverte
         )
         if pv_num_choices != 2:
             raise TypeError(f"{pv} has {pv_num_choices} choices, can't map to bool")
+        return PvaEnumBoolConverter()
+    elif (
+        datatype is bool
+        and typeid == "epics:nt/NTScalar:1.0"
+        and specifier in ("?", "b", "B", "i", "I")
+    ):
+        # If we specifically ask for bool and the type is a byte or short
+        # then we can treat this as a bool where 0 is False and 1 is True
         return PvaEnumBoolConverter()
     elif typeid == "epics:nt/NTEnum:1.0":
         pv_choices = get_unique(

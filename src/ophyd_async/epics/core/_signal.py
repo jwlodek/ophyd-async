@@ -7,6 +7,7 @@ from enum import Enum
 
 from ophyd_async.core import (
     DEFAULT_TIMEOUT,
+    DeviceVector,
     SignalBackend,
     SignalDatatypeT,
     SignalR,
@@ -199,3 +200,74 @@ def epics_signal_x(
     """
     backend = _epics_signal_backend(None, write_pv, write_pv)
     return SignalX(backend, name=name, timeout=timeout)
+
+
+_DEFAULT_MBB_BITS = tuple(range(16))
+
+
+def epics_mbb_direct_r(
+    read_pv: str,
+    name: str = "",
+    bits: tuple[int, ...] | dict[int, str] = _DEFAULT_MBB_BITS,
+    timeout: float = DEFAULT_TIMEOUT,
+) -> DeviceVector[SignalR[bool]]:
+    """Create a `DeviceVector`of `SignalRW[bool]` backed by an mbb(i/o)Direct record.
+
+    :param read_pv: The PV to read from (should be an mbb(i/o)Direct record)
+    :param name: The name of the signal (defaults to empty string)
+    :param bits: A tuple of bit numbers or a dict mapping bits to names
+    :param timeout: A timeout to be used when reading (not connecting) the signals
+    """
+    # mbb(i/o)Direct records have bits from 0-15, check that bits are in this range
+    if any(bit < 0 or bit > 15 for bit in bits):
+        raise ValueError("Bits must be between 0 and 15 for mbb(i/o)Direct records")
+
+    if isinstance(bits, tuple):
+        bits = {bit: f"{name}_bit{bit}" for bit in bits}
+
+    return DeviceVector(
+        {
+            bit: epics_signal_r(
+                bool, f"{read_pv}.B{bit:X}", name=bit_name, timeout=timeout
+            )
+            for bit, bit_name in bits.items()
+        },
+        name=name,
+    )
+
+
+def epics_mbb_direct_rw(
+    read_pv: str,
+    write_pv: str | None = None,
+    name: str = "",
+    bits: tuple[int, ...] | dict[int, str] = _DEFAULT_MBB_BITS,
+    timeout: float = DEFAULT_TIMEOUT,
+) -> DeviceVector[SignalRW[bool]]:
+    """Create a `DeviceVector`of `SignalRW[bool]` backed by an mbb(i/o)Direct record.
+
+    :param read_pv: The PV to read from (should be an mbb(i/o)Direct record)
+    :param write_pv: The PV to write to (if None, will use read_pv)
+    :param name: The name of the signal (defaults to empty string)
+    :param bits: A tuple of bit numbers or a dict mapping bits to names
+    :param timeout: A timeout to be used when reading (not connecting) the signals
+    """
+    # mbb(i/o)Direct records have bits from 0-15, check that bits are in this range
+    if any(bit < 0 or bit > 15 for bit in bits):
+        raise ValueError("Bits must be between 0 and 15 for mbb(i/o)Direct records")
+
+    if isinstance(bits, tuple):
+        bits = {bit: f"{name}_bit{bit}" for bit in bits}
+
+    return DeviceVector(
+        {
+            bit: epics_signal_rw(
+                bool,
+                f"{read_pv}.B{bit:X}",
+                write_pv=f"{write_pv}.B{bit:X}" if write_pv is not None else None,
+                name=bit_name,
+                timeout=timeout,
+            )
+            for bit, bit_name in bits.items()
+        },
+        name=name,
+    )
