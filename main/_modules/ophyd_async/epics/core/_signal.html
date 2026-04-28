@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ophyd_async.epics.core._signal &#8212; ophyd-async 0.1.dev935+gcb374f865 documentation</title>
+    <title>ophyd_async.epics.core._signal &#8212; ophyd-async 0.1.dev936+g8b4b83571 documentation</title>
   
   
   
@@ -41,7 +41,7 @@
   <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
 
-    <script src="../../../../_static/documentation_options.js?v=f4eefbc3"></script>
+    <script src="../../../../_static/documentation_options.js?v=53835e69"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -569,8 +569,8 @@ window.runMermaid = runMermaid;</script>
       
     
     
-    <img src="../../../../_static/ophyd-async-logo.svg" class="logo__image only-light" alt="ophyd-async 0.1.dev935+gcb374f865 documentation - Home"/>
-    <img src="../../../../_static/ophyd-async-logo.svg" class="logo__image only-dark pst-js-only" alt="ophyd-async 0.1.dev935+gcb374f865 documentation - Home"/>
+    <img src="../../../../_static/ophyd-async-logo.svg" class="logo__image only-light" alt="ophyd-async 0.1.dev936+g8b4b83571 documentation - Home"/>
+    <img src="../../../../_static/ophyd-async-logo.svg" class="logo__image only-dark pst-js-only" alt="ophyd-async 0.1.dev936+g8b4b83571 documentation - Home"/>
   
   
 </a></div>
@@ -907,7 +907,6 @@ window.runMermaid = runMermaid;</script>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">ophyd_async.core</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">DEFAULT_TIMEOUT</span><span class="p">,</span>
-    <span class="n">DeviceVector</span><span class="p">,</span>
     <span class="n">SignalBackend</span><span class="p">,</span>
     <span class="n">SignalDatatypeT</span><span class="p">,</span>
     <span class="n">SignalR</span><span class="p">,</span>
@@ -1114,83 +1113,6 @@ window.runMermaid = runMermaid;</script>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">backend</span> <span class="o">=</span> <span class="n">_epics_signal_backend</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">write_pv</span><span class="p">,</span> <span class="n">write_pv</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">SignalX</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span></div>
-
-
-
-<span class="n">_DEFAULT_MBB_BITS</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">16</span><span class="p">))</span>
-
-
-<div class="viewcode-block" id="epics_mbb_direct_r">
-<a class="viewcode-back" href="../../../../_api/ophyd_async/ophyd_async.epics.core.html#ophyd_async.epics.core.epics_mbb_direct_r">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">epics_mbb_direct_r</span><span class="p">(</span>
-    <span class="n">read_pv</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-    <span class="n">bits</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">_DEFAULT_MBB_BITS</span><span class="p">,</span>
-    <span class="n">timeout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_TIMEOUT</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DeviceVector</span><span class="p">[</span><span class="n">SignalR</span><span class="p">[</span><span class="nb">bool</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a `DeviceVector`of `SignalRW[bool]` backed by an mbb(i/o)Direct record.</span>
-
-<span class="sd">    :param read_pv: The PV to read from (should be an mbb(i/o)Direct record)</span>
-<span class="sd">    :param name: The name of the signal (defaults to empty string)</span>
-<span class="sd">    :param bits: A tuple of bit numbers or a dict mapping bits to names</span>
-<span class="sd">    :param timeout: A timeout to be used when reading (not connecting) the signals</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># mbb(i/o)Direct records have bits from 0-15, check that bits are in this range</span>
-    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">bit</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">bit</span> <span class="o">&gt;</span> <span class="mi">15</span> <span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="n">bits</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Bits must be between 0 and 15 for mbb(i/o)Direct records&quot;</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">bits</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-        <span class="n">bits</span> <span class="o">=</span> <span class="p">{</span><span class="n">bit</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">_bit</span><span class="si">{</span><span class="n">bit</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="n">bits</span><span class="p">}</span>
-
-    <span class="k">return</span> <span class="n">DeviceVector</span><span class="p">(</span>
-        <span class="p">{</span>
-            <span class="n">bit</span><span class="p">:</span> <span class="n">epics_signal_r</span><span class="p">(</span>
-                <span class="nb">bool</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">read_pv</span><span class="si">}</span><span class="s2">.B</span><span class="si">{</span><span class="n">bit</span><span class="si">:</span><span class="s2">X</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">bit_name</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span>
-            <span class="p">)</span>
-            <span class="k">for</span> <span class="n">bit</span><span class="p">,</span> <span class="n">bit_name</span> <span class="ow">in</span> <span class="n">bits</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-        <span class="p">},</span>
-        <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
-    <span class="p">)</span></div>
-
-
-
-<div class="viewcode-block" id="epics_mbb_direct_rw">
-<a class="viewcode-back" href="../../../../_api/ophyd_async/ophyd_async.epics.core.html#ophyd_async.epics.core.epics_mbb_direct_rw">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">epics_mbb_direct_rw</span><span class="p">(</span>
-    <span class="n">read_pv</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">write_pv</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-    <span class="n">bits</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">_DEFAULT_MBB_BITS</span><span class="p">,</span>
-    <span class="n">timeout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_TIMEOUT</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DeviceVector</span><span class="p">[</span><span class="n">SignalRW</span><span class="p">[</span><span class="nb">bool</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a `DeviceVector`of `SignalRW[bool]` backed by an mbb(i/o)Direct record.</span>
-
-<span class="sd">    :param read_pv: The PV to read from (should be an mbb(i/o)Direct record)</span>
-<span class="sd">    :param write_pv: The PV to write to (if None, will use read_pv)</span>
-<span class="sd">    :param name: The name of the signal (defaults to empty string)</span>
-<span class="sd">    :param bits: A tuple of bit numbers or a dict mapping bits to names</span>
-<span class="sd">    :param timeout: A timeout to be used when reading (not connecting) the signals</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># mbb(i/o)Direct records have bits from 0-15, check that bits are in this range</span>
-    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">bit</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">bit</span> <span class="o">&gt;</span> <span class="mi">15</span> <span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="n">bits</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Bits must be between 0 and 15 for mbb(i/o)Direct records&quot;</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">bits</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-        <span class="n">bits</span> <span class="o">=</span> <span class="p">{</span><span class="n">bit</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">_bit</span><span class="si">{</span><span class="n">bit</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="n">bits</span><span class="p">}</span>
-
-    <span class="k">return</span> <span class="n">DeviceVector</span><span class="p">(</span>
-        <span class="p">{</span>
-            <span class="n">bit</span><span class="p">:</span> <span class="n">epics_signal_rw</span><span class="p">(</span>
-                <span class="nb">bool</span><span class="p">,</span>
-                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">read_pv</span><span class="si">}</span><span class="s2">.B</span><span class="si">{</span><span class="n">bit</span><span class="si">:</span><span class="s2">X</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-                <span class="n">write_pv</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">write_pv</span><span class="si">}</span><span class="s2">.B</span><span class="si">{</span><span class="n">bit</span><span class="si">:</span><span class="s2">X</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">write_pv</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
-                <span class="n">name</span><span class="o">=</span><span class="n">bit_name</span><span class="p">,</span>
-                <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
-            <span class="p">)</span>
-            <span class="k">for</span> <span class="n">bit</span><span class="p">,</span> <span class="n">bit_name</span> <span class="ow">in</span> <span class="n">bits</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-        <span class="p">},</span>
-        <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
-    <span class="p">)</span></div>
 
 </pre></div>
 

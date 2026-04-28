@@ -79,14 +79,6 @@
   - ```{autodoc2-docstring} ophyd_async.epics.core._util.wait_for_good_state
     :summary:
     ```
-* - {py:obj}`epics_mbb_direct_r <ophyd_async.epics.core._signal.epics_mbb_direct_r>`
-  - ```{autodoc2-docstring} ophyd_async.epics.core._signal.epics_mbb_direct_r
-    :summary:
-    ```
-* - {py:obj}`epics_mbb_direct_rw <ophyd_async.epics.core._signal.epics_mbb_direct_rw>`
-  - ```{autodoc2-docstring} ophyd_async.epics.core._signal.epics_mbb_direct_rw
-    :summary:
-    ```
 ````
 
 ### API
@@ -412,17 +404,3 @@ Bases: {py:obj}`typing.Generic`\[{py:obj}`ophyd_async.core.SignalDatatypeT`\]
 ````
 
 `````
-
-````{py:function} epics_mbb_direct_r(read_pv: str, name: str = '', bits: tuple[int, ...] | dict[int, str] = _DEFAULT_MBB_BITS, timeout: float = DEFAULT_TIMEOUT) -> ~ophyd_async.core.DeviceVector[~ophyd_async.core.SignalR[bool]]
-:canonical: ophyd_async.epics.core._signal.epics_mbb_direct_r
-
-```{autodoc2-docstring} ophyd_async.epics.core._signal.epics_mbb_direct_r
-```
-````
-
-````{py:function} epics_mbb_direct_rw(read_pv: str, write_pv: str | None = None, name: str = '', bits: tuple[int, ...] | dict[int, str] = _DEFAULT_MBB_BITS, timeout: float = DEFAULT_TIMEOUT) -> ~ophyd_async.core.DeviceVector[~ophyd_async.core.SignalRW[bool]]
-:canonical: ophyd_async.epics.core._signal.epics_mbb_direct_rw
-
-```{autodoc2-docstring} ophyd_async.epics.core._signal.epics_mbb_direct_rw
-```
-````
