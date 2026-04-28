@@ -11,7 +11,7 @@ int32a: [-2147483648, 2147483647]
 lessint: 42
 longstr: a string that is just longer than forty characters
 longstr2: a string that is just longer than forty characters
-mbb_direct_bit_rw: False
+mbb_direct_bit: False
 mbb_direct_bit_r: False
 a_bool: true
 a_float: 3.141
