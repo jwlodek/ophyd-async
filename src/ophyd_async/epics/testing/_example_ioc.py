@@ -8,8 +8,6 @@ from ophyd_async.core import Array1D, SignalR, SignalRW, StrictEnum, SubsetEnum,
 from ophyd_async.epics.core import (
     EpicsDevice,
     PvSuffix,
-    epics_mbb_direct_r,
-    epics_mbb_direct_rw,
 )
 
 from ._utils import TestingIOC, generate_random_pv_prefix
@@ -66,24 +64,11 @@ class EpicsTestCaDevice(EpicsDevice):
     float32a: A[SignalRW[Array1D[np.float32]], PvSuffix("float32a")]
     float64a: A[SignalRW[Array1D[np.float64]], PvSuffix("float64a")]
     stra: A[SignalRW[Sequence[str]], PvSuffix("stra")]
-
-    # For mbb direct bits that are important, they can be exposed as individual
-    # named signals, as with any other pvs.
-    mbb_direct_important_bit: A[SignalRW[bool], PvSuffix("mbb_direct_rw.B0")]
+    mbb_direct_bit_r: A[SignalR[bool], PvSuffix("mbb_direct.B0")]
+    mbb_direct_bit: A[SignalRW[bool], PvSuffix("mbb_direct_rw.B0")]
 
     def __init__(self, prefix: str, name: str = ""):
         super().__init__(prefix, name=name)
-
-        # Otherwise, they can be exposed as a DeviceVector of signals
-        # using the epics_mbb_direct_r and epics_mbb_direct_rw helper functions.
-        self.mbb_direct = epics_mbb_direct_r(
-            prefix + "mbb_direct", bits=(0, 2, 4), name="mbb_direct"
-        )
-        self.mbb_direct_rw = epics_mbb_direct_rw(
-            prefix + "mbb_direct_rw",
-            bits={1: "stat1", 2: "stat2", 3: "stat3"},
-            name="mbb_direct_rw",
-        )
 
 
 class EpicsTestPvaDevice(EpicsTestCaDevice):

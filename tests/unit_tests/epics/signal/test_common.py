@@ -3,7 +3,6 @@ from enum import Enum
 import pytest
 
 from ophyd_async.core import StrictEnum, SupersetEnum
-from ophyd_async.epics.core import epics_mbb_direct_r
 from ophyd_async.epics.core._util import get_supported_values  # noqa: PLC2701
 
 
@@ -84,14 +83,3 @@ def test_given_supersetenum_that_partial_values_plus_extra_values_are_invalid():
 def test_given_supersetenum_that_no_matches_is_invalid():
     with pytest.raises(TypeError, match=SUPERSETENUM_ERROR_MESSAGE):
         get_supported_values("", MySupersetEnum, ("no_match_1", "no_match_2"))
-
-
-def test_mbb_direct_invalid_bit_numbers():
-    with pytest.raises(
-        ValueError, match=r"Bits must be between 0 and 15 for mbb\(i/o\)Direct records"
-    ):
-        epics_mbb_direct_r("TEST:PV", bits=(-1, 0, 1))
-    with pytest.raises(
-        ValueError, match=r"Bits must be between 0 and 15 for mbb\(i/o\)Direct records"
-    ):
-        epics_mbb_direct_r("TEST:PV", bits=(0, 1, 16))
