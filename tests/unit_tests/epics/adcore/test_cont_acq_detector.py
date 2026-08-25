@@ -102,7 +102,8 @@ async def test_cont_acq_controller_success(
     assert_has_calls(
         cont_acq_detector,
         [
-            call.cb.capture.put(False),
+            # ensure_ready() arms the circular buffer at stage()
+            call.cb.capture.put(True),
             call.cb.enable_callbacks.put(EnableDisable.ENABLE),
             call.cb.pre_count.put(0),
             call.cb.post_count.put(1),
@@ -110,7 +111,8 @@ async def test_cont_acq_controller_success(
             call.cb.flush_on_soft_trg.put(
                 adcore.NDCBFlushOnSoftTrgMode.ON_NEW_IMAGE
             ),
-            call.cb.capture.put(True),
+            # start_acquiring() fires the soft trigger on trigger()
+            call.cb.trigger_.put(True),
         ],
     )
 
