@@ -97,6 +97,7 @@ class KinetixDetector(AreaDetector[KinetixDriverIO]):
     :param prefix: EPICS PV prefix for the detector
     :param writer_factories: Factories for file writer plugins and their data logics
     :param driver_suffix: Suffix for the driver PV, defaults to "cam1:"
+    :param process_suffix: Suffix for an NDPluginProcess used to average/sum exposures per collection, e.g. "Proc1:". None means no process plugin.
     :param plugins: Additional areaDetector plugins to include
     :param config_sigs: Additional signals to include in configuration
     :param name: Name for the detector device
@@ -107,18 +108,22 @@ class KinetixDetector(AreaDetector[KinetixDriverIO]):
         prefix: str,
         *writer_factories: ADWriterFactory,
         driver_suffix: str = "cam1:",
+        process_suffix: str | None = None,
         plugins: dict[str, NDPluginBaseIO] | None = None,
         config_sigs: Sequence[SignalR] = (),
         name: str = "",
     ) -> None:
         driver = KinetixDriverIO(prefix + driver_suffix)
+        process_plugin = (
+            NDProcessIO(prefix + process_suffix) if process_suffix else None
+        )
         super().__init__(
             driver,
             prefix,
             *writer_factories,
             acquire_logic=ADAcquireLogic(driver),
-            trigger_logic=KinetixTriggerLogic(driver),
-            plugins=plugins,
+            trigger_logic=KinetixTriggerLogic(driver, process_plugin=process_plugin),
+            plugins=(plugins or {}) | ({"proc": process_plugin} if process_plugin else {}),
             config_sigs=config_sigs,
             name=name,
         )

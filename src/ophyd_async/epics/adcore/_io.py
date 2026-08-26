@@ -9,9 +9,8 @@ from ophyd_async.core import (
     StrictEnum,
     SupersetEnum,
     non_zero,
-    StandardReadableFormat as Format,
 )
-from ophyd_async.epics.core import EpicsDevice, EpicsOptions, PvSuffix, epics_signal_rw_rbv
+from ophyd_async.epics.core import EpicsDevice, EpicsOptions, PvSuffix
 from ophyd_async.core import IntersectEnum, SubsetEnum
 
 # Common classes for drivers and plugins
@@ -338,18 +337,16 @@ class NDProcessIO(NDPluginBaseIO):
     f_offset: A[SignalRW[float], PvSuffix.rbv("FOffset")]
     f_scale: A[SignalRW[float], PvSuffix.rbv("FScale")]
     r_offset: A[SignalRW[float], PvSuffix.rbv("ROffset")]
-
-    def __init__(self, prefix: str, name: str = ""):
-        self.output_coefficients = DeviceVector(
-            {i: epics_signal_rw_rbv(float, f"{prefix}OC{i}") for i in range(1, 5)}
-        )
-        self.filter_coefficients = DeviceVector(
-            {i: epics_signal_rw_rbv(float, f"{prefix}FC{i}") for i in range(1, 5)}
-        )
-        self.reset_state_coefficients = DeviceVector(
-            {i: epics_signal_rw_rbv(float, f"{prefix}RC{i}") for i in range(1, 3)}
-        )
-        super().__init__(prefix, name=name)
+    oc1: A[SignalRW[float], PvSuffix.rbv("OC1")]
+    oc2: A[SignalRW[float], PvSuffix.rbv("OC2")]
+    oc3: A[SignalRW[float], PvSuffix.rbv("OC3")]
+    oc4: A[SignalRW[float], PvSuffix.rbv("OC4")]
+    fc1: A[SignalRW[float], PvSuffix.rbv("FC1")]
+    fc2: A[SignalRW[float], PvSuffix.rbv("FC2")]
+    fc3: A[SignalRW[float], PvSuffix.rbv("FC3")]
+    fc4: A[SignalRW[float], PvSuffix.rbv("FC4")]
+    rc1: A[SignalRW[float], PvSuffix.rbv("RC1")]
+    rc2: A[SignalRW[float], PvSuffix.rbv("RC2")]
 
 
 # Codec/compression classes
@@ -395,15 +392,15 @@ class NDCodecIO(NDPluginBaseIO):
     See HTML docs at https://areadetector.github.io/areaDetector/ADCore/NDPluginCodec.html
     """
 
-    compressor: A[SignalRW[ADCompressor], PvSuffix.rbv("Compressor"), Format.CONFIG_SIGNAL]
-    mode: A[SignalRW[ADCompressMode], PvSuffix.rbv("Mode"), Format.CONFIG_SIGNAL]
-    comp_factor: A[SignalR[float], PvSuffix("CompFactor_RBV"), Format.CONFIG_SIGNAL]
-    jpeg_quality: A[SignalRW[int], PvSuffix.rbv("JPEGQuality"), Format.CONFIG_SIGNAL]
-    zlib_c_level: A[SignalRW[int], PvSuffix.rbv("ZlibCLevel"), Format.CONFIG_SIGNAL]
-    blosc_compressor: A[SignalRW[ADBloscCompressor], PvSuffix.rbv("BloscCompressor"), Format.CONFIG_SIGNAL]
-    blosc_c_level: A[SignalRW[int], PvSuffix.rbv("BloscCLevel"), Format.CONFIG_SIGNAL]
-    blosc_num_threads: A[SignalRW[int], PvSuffix.rbv("BloscNumThreads"), Format.CONFIG_SIGNAL]
-    lz4_hdf5_block_size: A[SignalRW[int], PvSuffix.rbv("LZ4HDF5BlockSize"), Format.CONFIG_SIGNAL]
+    compressor: A[SignalRW[ADCompressor], PvSuffix.rbv("Compressor")]
+    mode: A[SignalRW[ADCompressMode], PvSuffix.rbv("Mode")]
+    comp_factor: A[SignalR[float], PvSuffix("CompFactor_RBV")]
+    jpeg_quality: A[SignalRW[int], PvSuffix.rbv("JPEGQuality")]
+    zlib_c_level: A[SignalRW[int], PvSuffix.rbv("ZlibCLevel")]
+    blosc_compressor: A[SignalRW[ADBloscCompressor], PvSuffix.rbv("BloscCompressor")]
+    blosc_c_level: A[SignalRW[int], PvSuffix.rbv("BloscCLevel")]
+    blosc_num_threads: A[SignalRW[int], PvSuffix.rbv("BloscNumThreads")]
+    lz4_hdf5_block_size: A[SignalRW[int], PvSuffix.rbv("LZ4HDF5BlockSize")]
     codec_status: A[SignalR[NDCodecStatus], PvSuffix("CodecStatus")]
     codec_error: A[SignalR[str], PvSuffix("CodecError")]
 
@@ -484,7 +481,6 @@ class NDFileHDF5IO(NDPluginFileIO):
     lazy_open: A[SignalRW[bool], PvSuffix.rbv("LazyOpen")]
 
     # Compression options
-    szip_num_pixels: A[SignalRW[int], PvSuffix.rbv("SZipNumPixels")]
     z_level: A[SignalRW[int], PvSuffix.rbv("ZLevel")]
     blosc_shuffle: A[SignalRW[ADBloscShuffle], PvSuffix.rbv("BloscShuffle")]
     blosc_compressor: A[SignalRW[ADBloscCompressor], PvSuffix.rbv("BloscCompressor")]
