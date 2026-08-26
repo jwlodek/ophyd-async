@@ -79,10 +79,7 @@ async def test_cont_acq_controller_invalid_exposure_time(
 @pytest.fixture
 async def cont_acq_detector_with_proc() -> adcore.AreaDetector[adcore.ADBaseIO]:
     async with init_devices(mock=True):
-        det = adcore.ContAcqDetector(
-            prefix="PREFIX:",
-            plugins={"proc": adcore.NDProcessIO("PREFIX:PROC:")},
-        )
+        det = adcore.ContAcqDetector(prefix="PREFIX:", process_suffix="PROC:")
 
     set_mock_value(
         det.driver.image_mode,
@@ -130,7 +127,7 @@ async def test_cont_acq_controller_success_with_process_plugin(
     assert_has_calls(
         cont_acq_detector_with_proc,
         [
-            call.cb.capture.put(False),
+            call.cb.capture.put(True),
             call.proc.num_filter.put(exposures_per_collection),
             call.proc.enable_filter.put(True),
             call.proc.filter_type.put(adcore.NDProcessFilterType.AVERAGE),
@@ -146,7 +143,7 @@ async def test_cont_acq_controller_success_with_process_plugin(
             call.cb.flush_on_soft_trg.put(
                 adcore.NDCBFlushOnSoftTrgMode.ON_NEW_IMAGE
             ),
-            call.cb.capture.put(True),
+            call.cb.trigger_.put(True),
         ],
     )
 
