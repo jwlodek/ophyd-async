@@ -11,7 +11,7 @@ from ophyd_async.core import (
     non_zero,
     StandardReadableFormat as Format,
 )
-from ophyd_async.epics.core import EpicsDevice, EpicsOptions, PvSuffix, epics_signal_rw_rbv
+from ophyd_async.epics.core import EpicsDevice, EpicsOptions, PvSuffix
 from ophyd_async.core import IntersectEnum, SubsetEnum
 
 # Common classes for drivers and plugins
@@ -338,18 +338,16 @@ class NDProcessIO(NDPluginBaseIO):
     f_offset: A[SignalRW[float], PvSuffix.rbv("FOffset")]
     f_scale: A[SignalRW[float], PvSuffix.rbv("FScale")]
     r_offset: A[SignalRW[float], PvSuffix.rbv("ROffset")]
-
-    def __init__(self, prefix: str, name: str = ""):
-        self.output_coefficients = DeviceVector(
-            {i: epics_signal_rw_rbv(float, f"{prefix}OC{i}") for i in range(1, 5)}
-        )
-        self.filter_coefficients = DeviceVector(
-            {i: epics_signal_rw_rbv(float, f"{prefix}FC{i}") for i in range(1, 5)}
-        )
-        self.reset_state_coefficients = DeviceVector(
-            {i: epics_signal_rw_rbv(float, f"{prefix}RC{i}") for i in range(1, 3)}
-        )
-        super().__init__(prefix, name=name)
+    oc1: A[SignalRW[float], PvSuffix.rbv("OC1")]
+    oc2: A[SignalRW[float], PvSuffix.rbv("OC2")]
+    oc3: A[SignalRW[float], PvSuffix.rbv("OC3")]
+    oc4: A[SignalRW[float], PvSuffix.rbv("OC4")]
+    fc1: A[SignalRW[float], PvSuffix.rbv("FC1")]
+    fc2: A[SignalRW[float], PvSuffix.rbv("FC2")]
+    fc3: A[SignalRW[float], PvSuffix.rbv("FC3")]
+    fc4: A[SignalRW[float], PvSuffix.rbv("FC4")]
+    rc1: A[SignalRW[float], PvSuffix.rbv("RC1")]
+    rc2: A[SignalRW[float], PvSuffix.rbv("RC2")]
 
 
 # Codec/compression classes
