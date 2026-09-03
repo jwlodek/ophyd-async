@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ophyd_async.epics.adcore._io &#8212; ophyd-async 0.1.dev941+g21cd2606f documentation</title>
+    <title>ophyd_async.epics.adcore._io &#8212; ophyd-async 0.1.dev1017+g111e081c4 documentation</title>
   
   
   
@@ -41,7 +41,7 @@
   <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
 
-    <script src="../../../../_static/documentation_options.js?v=65028d26"></script>
+    <script src="../../../../_static/documentation_options.js?v=d8417e58"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -569,8 +569,8 @@ window.runMermaid = runMermaid;</script>
       
     
     
-    <img src="../../../../_static/ophyd-async-logo.svg" class="logo__image only-light" alt="ophyd-async 0.1.dev941+g21cd2606f documentation - Home"/>
-    <img src="../../../../_static/ophyd-async-logo.svg" class="logo__image only-dark pst-js-only" alt="ophyd-async 0.1.dev941+g21cd2606f documentation - Home"/>
+    <img src="../../../../_static/ophyd-async-logo.svg" class="logo__image only-light" alt="ophyd-async 0.1.dev1017+g111e081c4 documentation - Home"/>
+    <img src="../../../../_static/ophyd-async-logo.svg" class="logo__image only-dark pst-js-only" alt="ophyd-async 0.1.dev1017+g111e081c4 documentation - Home"/>
   
   
 </a></div>
@@ -1086,10 +1086,25 @@ window.runMermaid = runMermaid;</script>
 <span class="sd">    See HTML docs at https://areadetector.github.io/areaDetector/ADCore/NDPluginROI.html</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">size_x</span><span class="p">:</span> <span class="n">A</span><span class="p">[</span><span class="n">SignalR</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">PvSuffix</span><span class="o">.</span><span class="n">rbv</span><span class="p">(</span><span class="s2">&quot;SizeX&quot;</span><span class="p">)]</span>
-    <span class="n">size_y</span><span class="p">:</span> <span class="n">A</span><span class="p">[</span><span class="n">SignalR</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">PvSuffix</span><span class="o">.</span><span class="n">rbv</span><span class="p">(</span><span class="s2">&quot;SizeY&quot;</span><span class="p">)]</span>
-    <span class="n">size_z</span><span class="p">:</span> <span class="n">A</span><span class="p">[</span><span class="n">SignalR</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">PvSuffix</span><span class="o">.</span><span class="n">rbv</span><span class="p">(</span><span class="s2">&quot;SizeZ&quot;</span><span class="p">)]</span></div>
+    <span class="n">size_x</span><span class="p">:</span> <span class="n">A</span><span class="p">[</span><span class="n">SignalRW</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">PvSuffix</span><span class="o">.</span><span class="n">rbv</span><span class="p">(</span><span class="s2">&quot;SizeX&quot;</span><span class="p">)]</span>
+    <span class="n">size_y</span><span class="p">:</span> <span class="n">A</span><span class="p">[</span><span class="n">SignalRW</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">PvSuffix</span><span class="o">.</span><span class="n">rbv</span><span class="p">(</span><span class="s2">&quot;SizeY&quot;</span><span class="p">)]</span>
+    <span class="n">size_z</span><span class="p">:</span> <span class="n">A</span><span class="p">[</span><span class="n">SignalRW</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">PvSuffix</span><span class="o">.</span><span class="n">rbv</span><span class="p">(</span><span class="s2">&quot;SizeZ&quot;</span><span class="p">)]</span>
 
+    <span class="n">bin_x</span><span class="p">:</span> <span class="n">A</span><span class="p">[</span><span class="n">SignalRW</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">PvSuffix</span><span class="o">.</span><span class="n">rbv</span><span class="p">(</span><span class="s2">&quot;BinX&quot;</span><span class="p">)]</span>
+    <span class="n">bin_y</span><span class="p">:</span> <span class="n">A</span><span class="p">[</span><span class="n">SignalRW</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">PvSuffix</span><span class="o">.</span><span class="n">rbv</span><span class="p">(</span><span class="s2">&quot;BinY&quot;</span><span class="p">)]</span>
+    <span class="n">bin_z</span><span class="p">:</span> <span class="n">A</span><span class="p">[</span><span class="n">SignalRW</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">PvSuffix</span><span class="o">.</span><span class="n">rbv</span><span class="p">(</span><span class="s2">&quot;BinZ&quot;</span><span class="p">)]</span></div>
+
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">NDProcessIO</span><span class="p">(</span><span class="n">NDPluginBaseIO</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plugin for performing processing on an NDArrray.</span>
+
+<span class="sd">    This mirrors the interface provided by ADCore/db/NDProcess.template.</span>
+<span class="sd">    See HTML docs at https://areadetector.github.io/areaDetector/ADCore/NDPluginProcess.html</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">enable_offset_scale</span><span class="p">:</span> <span class="n">A</span><span class="p">[</span><span class="n">SignalRW</span><span class="p">[</span><span class="n">EnableDisable</span><span class="p">],</span> <span class="n">PvSuffix</span><span class="o">.</span><span class="n">rbv</span><span class="p">(</span><span class="s2">&quot;EnableOffsetScale&quot;</span><span class="p">)]</span>
+    <span class="n">scale</span><span class="p">:</span> <span class="n">A</span><span class="p">[</span><span class="n">SignalRW</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">PvSuffix</span><span class="o">.</span><span class="n">rbv</span><span class="p">(</span><span class="s2">&quot;Scale&quot;</span><span class="p">)]</span>
 
 
 <div class="viewcode-block" id="NDStatsIO">
@@ -1104,14 +1119,14 @@ window.runMermaid = runMermaid;</script>
     <span class="c1"># Basic statistics</span>
     <span class="n">compute_statistics</span><span class="p">:</span> <span class="n">A</span><span class="p">[</span><span class="n">SignalRW</span><span class="p">[</span><span class="nb">bool</span><span class="p">],</span> <span class="n">PvSuffix</span><span class="o">.</span><span class="n">rbv</span><span class="p">(</span><span class="s2">&quot;ComputeStatistics&quot;</span><span class="p">)]</span>
     <span class="n">bgd_width</span><span class="p">:</span> <span class="n">A</span><span class="p">[</span><span class="n">SignalRW</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">PvSuffix</span><span class="o">.</span><span class="n">rbv</span><span class="p">(</span><span class="s2">&quot;BgdWidth&quot;</span><span class="p">)]</span>
-    <span class="n">total</span><span class="p">:</span> <span class="n">A</span><span class="p">[</span><span class="n">SignalR</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">PvSuffix</span><span class="o">.</span><span class="n">rbv</span><span class="p">(</span><span class="s2">&quot;Total&quot;</span><span class="p">)]</span>
+    <span class="n">total</span><span class="p">:</span> <span class="n">A</span><span class="p">[</span><span class="n">SignalR</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">PvSuffix</span><span class="p">(</span><span class="s2">&quot;Total_RBV&quot;</span><span class="p">)]</span>
     <span class="c1"># Centroid statistics</span>
     <span class="n">compute_centroid</span><span class="p">:</span> <span class="n">A</span><span class="p">[</span><span class="n">SignalRW</span><span class="p">[</span><span class="nb">bool</span><span class="p">],</span> <span class="n">PvSuffix</span><span class="o">.</span><span class="n">rbv</span><span class="p">(</span><span class="s2">&quot;ComputeCentroid&quot;</span><span class="p">)]</span>
     <span class="n">centroid_threshold</span><span class="p">:</span> <span class="n">A</span><span class="p">[</span><span class="n">SignalRW</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">PvSuffix</span><span class="o">.</span><span class="n">rbv</span><span class="p">(</span><span class="s2">&quot;CentroidThreshold&quot;</span><span class="p">)]</span>
     <span class="c1"># X and Y Profiles</span>
     <span class="n">compute_profiles</span><span class="p">:</span> <span class="n">A</span><span class="p">[</span><span class="n">SignalRW</span><span class="p">[</span><span class="nb">bool</span><span class="p">],</span> <span class="n">PvSuffix</span><span class="o">.</span><span class="n">rbv</span><span class="p">(</span><span class="s2">&quot;ComputeProfiles&quot;</span><span class="p">)]</span>
-    <span class="n">profile_size_x</span><span class="p">:</span> <span class="n">A</span><span class="p">[</span><span class="n">SignalR</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">PvSuffix</span><span class="o">.</span><span class="n">rbv</span><span class="p">(</span><span class="s2">&quot;ProfileSizeX&quot;</span><span class="p">)]</span>
-    <span class="n">profile_size_y</span><span class="p">:</span> <span class="n">A</span><span class="p">[</span><span class="n">SignalR</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">PvSuffix</span><span class="o">.</span><span class="n">rbv</span><span class="p">(</span><span class="s2">&quot;ProfileSizeY&quot;</span><span class="p">)]</span>
+    <span class="n">profile_size_x</span><span class="p">:</span> <span class="n">A</span><span class="p">[</span><span class="n">SignalR</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">PvSuffix</span><span class="p">(</span><span class="s2">&quot;ProfileSizeX_RBV&quot;</span><span class="p">)]</span>
+    <span class="n">profile_size_y</span><span class="p">:</span> <span class="n">A</span><span class="p">[</span><span class="n">SignalR</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">PvSuffix</span><span class="p">(</span><span class="s2">&quot;ProfileSizeY_RBV&quot;</span><span class="p">)]</span>
     <span class="n">cursor_x</span><span class="p">:</span> <span class="n">A</span><span class="p">[</span><span class="n">SignalRW</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">PvSuffix</span><span class="o">.</span><span class="n">rbv</span><span class="p">(</span><span class="s2">&quot;CursorX&quot;</span><span class="p">)]</span>
     <span class="n">cursor_y</span><span class="p">:</span> <span class="n">A</span><span class="p">[</span><span class="n">SignalRW</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">PvSuffix</span><span class="o">.</span><span class="n">rbv</span><span class="p">(</span><span class="s2">&quot;CursorY&quot;</span><span class="p">)]</span>
     <span class="c1"># Array Histogram</span>
@@ -1200,7 +1215,7 @@ window.runMermaid = runMermaid;</script>
     <span class="n">pre_count</span><span class="p">:</span> <span class="n">A</span><span class="p">[</span><span class="n">SignalRW</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">PvSuffix</span><span class="o">.</span><span class="n">rbv</span><span class="p">(</span><span class="s2">&quot;PreCount&quot;</span><span class="p">)]</span>
     <span class="n">post_count</span><span class="p">:</span> <span class="n">A</span><span class="p">[</span><span class="n">SignalRW</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">PvSuffix</span><span class="o">.</span><span class="n">rbv</span><span class="p">(</span><span class="s2">&quot;PostCount&quot;</span><span class="p">)]</span>
     <span class="n">preset_trigger_count</span><span class="p">:</span> <span class="n">A</span><span class="p">[</span><span class="n">SignalRW</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">PvSuffix</span><span class="o">.</span><span class="n">rbv</span><span class="p">(</span><span class="s2">&quot;PresetTriggerCount&quot;</span><span class="p">)]</span>
-    <span class="n">trigger</span><span class="p">:</span> <span class="n">A</span><span class="p">[</span><span class="n">SignalRW</span><span class="p">[</span><span class="nb">bool</span><span class="p">],</span> <span class="n">PvSuffix</span><span class="o">.</span><span class="n">rbv</span><span class="p">(</span><span class="s2">&quot;Trigger&quot;</span><span class="p">),</span> <span class="n">EpicsOptions</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="n">non_zero</span><span class="p">)]</span>
+    <span class="n">trigger_</span><span class="p">:</span> <span class="n">A</span><span class="p">[</span><span class="n">SignalRW</span><span class="p">[</span><span class="nb">bool</span><span class="p">],</span> <span class="n">PvSuffix</span><span class="o">.</span><span class="n">rbv</span><span class="p">(</span><span class="s2">&quot;Trigger&quot;</span><span class="p">),</span> <span class="n">EpicsOptions</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="n">non_zero</span><span class="p">)]</span>
     <span class="n">capture</span><span class="p">:</span> <span class="n">A</span><span class="p">[</span><span class="n">SignalRW</span><span class="p">[</span><span class="nb">bool</span><span class="p">],</span> <span class="n">PvSuffix</span><span class="o">.</span><span class="n">rbv</span><span class="p">(</span><span class="s2">&quot;Capture&quot;</span><span class="p">),</span> <span class="n">EpicsOptions</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="n">non_zero</span><span class="p">)]</span>
     <span class="n">flush_on_soft_trg</span><span class="p">:</span> <span class="n">A</span><span class="p">[</span>
         <span class="n">SignalRW</span><span class="p">[</span><span class="n">NDCBFlushOnSoftTrgMode</span><span class="p">],</span> <span class="n">PvSuffix</span><span class="o">.</span><span class="n">rbv</span><span class="p">(</span><span class="s2">&quot;FlushOnSoftTrg&quot;</span><span class="p">)</span>

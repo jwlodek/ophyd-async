@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ophyd_async.core._signal &#8212; ophyd-async 0.1.dev941+g21cd2606f documentation</title>
+    <title>ophyd_async.core._signal &#8212; ophyd-async 0.1.dev1017+g111e081c4 documentation</title>
   
   
   
@@ -41,7 +41,7 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
 
-    <script src="../../../_static/documentation_options.js?v=65028d26"></script>
+    <script src="../../../_static/documentation_options.js?v=d8417e58"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -569,8 +569,8 @@ window.runMermaid = runMermaid;</script>
       
     
     
-    <img src="../../../_static/ophyd-async-logo.svg" class="logo__image only-light" alt="ophyd-async 0.1.dev941+g21cd2606f documentation - Home"/>
-    <img src="../../../_static/ophyd-async-logo.svg" class="logo__image only-dark pst-js-only" alt="ophyd-async 0.1.dev941+g21cd2606f documentation - Home"/>
+    <img src="../../../_static/ophyd-async-logo.svg" class="logo__image only-light" alt="ophyd-async 0.1.dev1017+g111e081c4 documentation - Home"/>
+    <img src="../../../_static/ophyd-async-logo.svg" class="logo__image only-dark pst-js-only" alt="ophyd-async 0.1.dev1017+g111e081c4 documentation - Home"/>
   
   
 </a></div>
@@ -905,7 +905,8 @@ window.runMermaid = runMermaid;</script>
 <span class="kn">import</span><span class="w"> </span><span class="nn">functools</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">inspect</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">AsyncGenerator</span><span class="p">,</span> <span class="n">Awaitable</span><span class="p">,</span> <span class="n">Callable</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">AsyncGenerator</span><span class="p">,</span> <span class="n">Callable</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Generic</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">cast</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">bluesky.protocols</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
@@ -924,23 +925,16 @@ window.runMermaid = runMermaid;</script>
 <span class="kn">from</span><span class="w"> </span><span class="nn">._mock_signal_backend</span><span class="w"> </span><span class="kn">import</span> <span class="n">MockSignalBackend</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">._protocol</span><span class="w"> </span><span class="kn">import</span> <span class="n">AsyncReadable</span><span class="p">,</span> <span class="n">AsyncStageable</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">._signal_backend</span><span class="w"> </span><span class="kn">import</span> <span class="n">SignalBackend</span><span class="p">,</span> <span class="n">SignalDatatypeT</span><span class="p">,</span> <span class="n">SignalDatatypeV</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">._soft_signal_backend</span><span class="w"> </span><span class="kn">import</span> <span class="n">SoftSignalBackend</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">._soft_signal_backend</span><span class="w"> </span><span class="kn">import</span> <span class="n">Getter</span><span class="p">,</span> <span class="n">Setter</span><span class="p">,</span> <span class="n">SoftSignalBackend</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">._status</span><span class="w"> </span><span class="kn">import</span> <span class="n">AsyncStatus</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">._utils</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
     <span class="n">CALCULATE_TIMEOUT</span><span class="p">,</span>
     <span class="n">DEFAULT_TIMEOUT</span><span class="p">,</span>
     <span class="n">CalculatableTimeout</span><span class="p">,</span>
     <span class="n">Callback</span><span class="p">,</span>
-    <span class="n">T</span><span class="p">,</span>
+    <span class="n">_wait_for</span><span class="p">,</span>
     <span class="n">error_if_none</span><span class="p">,</span>
 <span class="p">)</span>
-
-
-<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_wait_for</span><span class="p">(</span><span class="n">coro</span><span class="p">:</span> <span class="n">Awaitable</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">timeout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="k">return</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">wait_for</span><span class="p">(</span><span class="n">coro</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">TimeoutError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">TimeoutError</span><span class="p">(</span><span class="n">source</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_add_timeout</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
@@ -1017,7 +1011,11 @@ window.runMermaid = runMermaid;</script>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">datatype</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">type</span><span class="p">[</span><span class="n">SignalDatatypeT</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the datatype of the signal.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the datatype of the signal.</span>
+
+<span class="sd">        This will return what was passed at construction time. None means the</span>
+<span class="sd">        backend will calculate it from the control system on connection.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connector</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">datatype</span></div>
 
 
@@ -1265,7 +1263,25 @@ window.runMermaid = runMermaid;</script>
 <div class="viewcode-block" id="SignalX">
 <a class="viewcode-back" href="../../../_api/ophyd_async/ophyd_async.core.html#ophyd_async.core.SignalX">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">SignalX</span><span class="p">(</span><span class="n">Signal</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Signal that puts the default value.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Signal that puts the default value.</span>
+
+<span class="sd">    ```{version-deprecated} 0.19</span>
+<span class="sd">    Use [](#TriggerableCommand) instead.</span>
+<span class="sd">    ```</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">backend</span><span class="p">:</span> <span class="n">SignalBackend</span><span class="p">,</span>
+        <span class="n">timeout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">DEFAULT_TIMEOUT</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;SignalX is deprecated, use TriggerableCommand instead&quot;</span><span class="p">,</span>
+            <span class="ne">DeprecationWarning</span><span class="p">,</span>
+            <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
 
 <div class="viewcode-block" id="SignalX.trigger">
 <a class="viewcode-back" href="../../../_api/ophyd_async/ophyd_async.core.html#ophyd_async.core.SignalX.trigger">[docs]</a>
@@ -1293,6 +1309,10 @@ window.runMermaid = runMermaid;</script>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
     <span class="n">units</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">precision</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">getter</span><span class="p">:</span> <span class="n">Getter</span><span class="p">[</span><span class="n">SignalDatatypeT</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">setter</span><span class="p">:</span> <span class="n">Setter</span><span class="p">[</span><span class="n">SignalDatatypeT</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">poll_period</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SignalRW</span><span class="p">[</span><span class="n">SignalDatatypeT</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a read-writable Signal with a [](#SoftSignalBackend).</span>
 
@@ -1303,8 +1323,38 @@ window.runMermaid = runMermaid;</script>
 <span class="sd">    :param name: The name of the signal.</span>
 <span class="sd">    :param units: The units of the signal.</span>
 <span class="sd">    :param precision: The precision of the signal.</span>
+<span class="sd">    :param getter:</span>
+<span class="sd">        Optional callable returning the current device value, called on</span>
+<span class="sd">        get_value/get_reading and periodically if poll_period is set. May be</span>
+<span class="sd">        sync or async; an async getter is awaited.</span>
+<span class="sd">    :param setter:</span>
+<span class="sd">        Optional callable performing the set action. May be sync or async; an</span>
+<span class="sd">        async setter is awaited before the put completes. May return the settled</span>
+<span class="sd">        value; if it returns None and a getter is configured, the getter is</span>
+<span class="sd">        called to refresh the cache.</span>
+<span class="sd">    :param poll_period:</span>
+<span class="sd">        How often (seconds) to call the getter while a subscription is active.</span>
+<span class="sd">        Requires getter to be set.</span>
+
+<span class="sd">    :example:</span>
+<span class="sd">    ```python</span>
+<span class="sd">    def read_position() -&gt; float: ...</span>
+
+<span class="sd">    async def move_to(position: float) -&gt; float: ...</span>
+
+<span class="sd">    # getter and setter can independently be sync or async</span>
+<span class="sd">    signal = soft_signal_rw(float, getter=read_position, setter=move_to)</span>
+<span class="sd">    ```</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">backend</span> <span class="o">=</span> <span class="n">SoftSignalBackend</span><span class="p">(</span><span class="n">datatype</span><span class="p">,</span> <span class="n">initial_value</span><span class="p">,</span> <span class="n">units</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
+    <span class="n">backend</span> <span class="o">=</span> <span class="n">SoftSignalBackend</span><span class="p">(</span>
+        <span class="n">datatype</span><span class="p">,</span>
+        <span class="n">initial_value</span><span class="p">,</span>
+        <span class="n">units</span><span class="p">,</span>
+        <span class="n">precision</span><span class="p">,</span>
+        <span class="n">getter</span><span class="o">=</span><span class="n">getter</span><span class="p">,</span>
+        <span class="n">setter</span><span class="o">=</span><span class="n">setter</span><span class="p">,</span>
+        <span class="n">poll_period</span><span class="o">=</span><span class="n">poll_period</span><span class="p">,</span>
+    <span class="p">)</span>
     <span class="n">signal</span> <span class="o">=</span> <span class="n">SignalRW</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">signal</span></div>
 
@@ -1318,6 +1368,9 @@ window.runMermaid = runMermaid;</script>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
     <span class="n">units</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">precision</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">getter</span><span class="p">:</span> <span class="n">Getter</span><span class="p">[</span><span class="n">SignalDatatypeT</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">poll_period</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">SignalR</span><span class="p">[</span><span class="n">SignalDatatypeT</span><span class="p">],</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">SignalDatatypeT</span><span class="p">],</span> <span class="kc">None</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a read-only Signal with a [](#SoftSignalBackend).</span>
 
@@ -1329,9 +1382,23 @@ window.runMermaid = runMermaid;</script>
 <span class="sd">    :param name: The name of the signal.</span>
 <span class="sd">    :param units: The units of the signal.</span>
 <span class="sd">    :param precision: The precision of the signal.</span>
+<span class="sd">    :param getter:</span>
+<span class="sd">        Optional callable returning the current device value, called on</span>
+<span class="sd">        get_value/get_reading and periodically if poll_period is set. May be</span>
+<span class="sd">        sync or async; an async getter is awaited.</span>
+<span class="sd">    :param poll_period:</span>
+<span class="sd">        How often (seconds) to call the getter while a subscription is active.</span>
+<span class="sd">        Requires getter to be set.</span>
 <span class="sd">    :return: A tuple of the created SignalR and a callable to set its value.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">backend</span> <span class="o">=</span> <span class="n">SoftSignalBackend</span><span class="p">(</span><span class="n">datatype</span><span class="p">,</span> <span class="n">initial_value</span><span class="p">,</span> <span class="n">units</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>
+    <span class="n">backend</span> <span class="o">=</span> <span class="n">SoftSignalBackend</span><span class="p">(</span>
+        <span class="n">datatype</span><span class="p">,</span>
+        <span class="n">initial_value</span><span class="p">,</span>
+        <span class="n">units</span><span class="p">,</span>
+        <span class="n">precision</span><span class="p">,</span>
+        <span class="n">getter</span><span class="o">=</span><span class="n">getter</span><span class="p">,</span>
+        <span class="n">poll_period</span><span class="o">=</span><span class="n">poll_period</span><span class="p">,</span>
+    <span class="p">)</span>
     <span class="n">signal</span> <span class="o">=</span> <span class="n">SignalR</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">backend</span><span class="o">.</span><span class="n">set_value</span><span class="p">)</span></div>
 
@@ -1593,8 +1660,18 @@ window.runMermaid = runMermaid;</script>
 
     <span class="c1"># Put this in a try/except to ensure wait_task is cancelled when we exit</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="k">async</span> <span class="k">with</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">timeout</span><span class="p">(</span><span class="n">timeout</span><span class="p">):</span>
-            <span class="k">await</span> <span class="n">checker</span><span class="o">.</span><span class="n">got_first_value</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+        <span class="c1"># NOTE: this timeout races wait_task&#39;s own internal timeout (same</span>
+        <span class="c1"># duration, started moments earlier) - whichever elapses first wins.</span>
+        <span class="c1"># That race is harmless because each path reports its own distinct,</span>
+        <span class="c1"># helpful message.</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">async</span> <span class="k">with</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">timeout</span><span class="p">(</span><span class="n">timeout</span><span class="p">):</span>
+                <span class="k">await</span> <span class="n">checker</span><span class="o">.</span><span class="n">got_first_value</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">TimeoutError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TimeoutError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">match_signal</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> didn&#39;t provide an initial value within &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">timeout</span><span class="si">}</span><span class="s2">s, is it connected?&quot;</span>
+            <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
 
         <span class="c1"># Now we can start the set</span>
         <span class="n">status</span> <span class="o">=</span> <span class="n">set_signal</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">set_value</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">set_timeout</span><span class="p">)</span>
