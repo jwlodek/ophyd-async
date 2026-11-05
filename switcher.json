@@ -2,5 +2,9 @@
   {
     "version": "main",
     "url": "https://jwlodek.github.io/ophyd-async/main/"
+  },
+  {
+    "version": "v0.21.3",
+    "url": "https://jwlodek.github.io/ophyd-async/v0.21.3/"
   }
 ]
